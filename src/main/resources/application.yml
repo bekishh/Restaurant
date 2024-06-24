@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: Restaurant
+  datasource:
+    url: jdbc:postgresql://localhost:5432/beknazar
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  jwt:
+    secret_key: java-13
+server:
+  port: 8080
+  error:
+    include-message: always
