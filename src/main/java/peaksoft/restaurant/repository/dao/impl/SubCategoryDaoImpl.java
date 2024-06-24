@@ -13,7 +13,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Repository
-public class SubCategoryJDBCTemplate implements SubCategoryDao {
+public class SubCategoryDaoImpl implements SubCategoryDao {
 
     private final JdbcTemplate jdbcTemplate;
 

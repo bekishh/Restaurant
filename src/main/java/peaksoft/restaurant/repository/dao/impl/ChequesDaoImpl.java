@@ -13,7 +13,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class ChequesJDBCTemplate implements ChequesDao {
+public class ChequesDaoImpl implements ChequesDao {
 
     private final JdbcTemplate jdbcTemplate;
 

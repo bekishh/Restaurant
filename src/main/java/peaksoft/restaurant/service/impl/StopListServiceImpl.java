@@ -11,7 +11,7 @@ import peaksoft.restaurant.exception.NotFoundException;
 import peaksoft.restaurant.repository.MenuRepository;
 import peaksoft.restaurant.repository.RestaurantRepository;
 import peaksoft.restaurant.repository.StopListRepository;
-import peaksoft.restaurant.repository.dao.impl.StopListJDBCTemplate;
+import peaksoft.restaurant.repository.dao.impl.StopListDaoImpl;
 import peaksoft.restaurant.service.StopListService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +27,7 @@ import java.util.List;
 public class StopListServiceImpl implements StopListService {
 
     private final StopListRepository stopListRepository;
-    private final StopListJDBCTemplate stopListJDBCTemplate;
+    private final StopListDaoImpl stopListDaoImpl;
     private final MenuRepository menuRepository;
     private final RestaurantRepository restaurantRepository;
 
@@ -60,7 +60,7 @@ public class StopListServiceImpl implements StopListService {
             log.error(String.format("Stop List with id: %s is exists", stopListId));
             throw new NotFoundException(String.format("Stop List with id: %s is exists", stopListId));
         }
-        return stopListJDBCTemplate.getStopListById(stopListId);
+        return stopListDaoImpl.getStopListById(stopListId);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class StopListServiceImpl implements StopListService {
             throw new NotFoundException(String.format("Restaurant with id: %s not found", restId));
         }
         log.info("Successfully gedet all stopLists with restaurant id");
-        return stopListJDBCTemplate.getAllStopLists(restId);
+        return stopListDaoImpl.getAllStopLists(restId);
     }
 
     @Override
@@ -107,6 +107,6 @@ public class StopListServiceImpl implements StopListService {
 
     @Override
     public StopListPagination getAll(int page, int pageSize) {
-        return stopListJDBCTemplate.getAll(page, pageSize);
+        return stopListDaoImpl.getAll(page, pageSize);
     }
 }

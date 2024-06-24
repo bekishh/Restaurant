@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class StopListJDBCTemplate implements StopListDao {
+public class StopListDaoImpl implements StopListDao {
 
     private final JdbcTemplate jdbcTemplate;
 

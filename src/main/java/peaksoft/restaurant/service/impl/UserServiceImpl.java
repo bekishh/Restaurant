@@ -13,7 +13,7 @@ import peaksoft.restaurant.exception.BadRequestException;
 import peaksoft.restaurant.exception.NotFoundException;
 import peaksoft.restaurant.repository.RestaurantRepository;
 import peaksoft.restaurant.repository.UserRepository;
-import peaksoft.restaurant.repository.dao.impl.UserJDBCTemplate;
+import peaksoft.restaurant.repository.dao.impl.UserDaoImpl;
 import peaksoft.restaurant.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,14 +31,14 @@ import java.time.Period;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final UserJDBCTemplate userJDBCTemplate;
+    private final UserDaoImpl userDaoImpl;
     private final RestaurantRepository restaurantRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserResponsePagination getAll(int currentPage,int pageSize) {
         log.info("User list successfully exit");
-        return userJDBCTemplate.getAllUsers(currentPage,pageSize);
+        return userDaoImpl.getAllUsers(currentPage,pageSize);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
                     "User with id: " + userId + " is not found!");
         }
         log.info(String.format("User with id:%s successfully exit", userId));
-        return userJDBCTemplate.getUserById(userId);
+        return userDaoImpl.getUserById(userId);
     }
 
     @Override

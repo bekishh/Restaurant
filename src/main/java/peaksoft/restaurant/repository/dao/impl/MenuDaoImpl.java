@@ -15,7 +15,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class MenuJDBCTemplate implements MenuDao {
+public class MenuDaoImpl implements MenuDao {
 
     private final JdbcTemplate jdbcTemplate;
 

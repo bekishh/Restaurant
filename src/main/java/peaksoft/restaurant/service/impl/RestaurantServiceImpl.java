@@ -6,7 +6,7 @@ import peaksoft.restaurant.dto.SimpleResponse;
 import peaksoft.restaurant.entity.Restaurant;
 import peaksoft.restaurant.exception.NotFoundException;
 import peaksoft.restaurant.repository.RestaurantRepository;
-import peaksoft.restaurant.repository.dao.impl.RestaurantJDBCTemplate;
+import peaksoft.restaurant.repository.dao.impl.RestaurantDaoImpl;
 import peaksoft.restaurant.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ import java.util.List;
 public class RestaurantServiceImpl implements RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
-    private final RestaurantJDBCTemplate restaurantJDBCTemplate;
+    private final RestaurantDaoImpl restaurantDaoImpl;
 
     @Override
     public SimpleResponse saveRestaurant(RestaurantRequest restaurantRequest) {
@@ -40,12 +40,12 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public List<RestaurantResponse> getAll() {
-        return restaurantJDBCTemplate.getAllRestaurant();
+        return restaurantDaoImpl.getAllRestaurant();
     }
 
     @Override
     public RestaurantResponse getRestaurantById(Long restaurantId) {
-        return restaurantJDBCTemplate.getById(restaurantId);
+        return restaurantDaoImpl.getById(restaurantId);
     }
 
     @Override

@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class RestaurantJDBCTemplate implements RestaurantDao {
+public class RestaurantDaoImpl implements RestaurantDao {
 
     private final JdbcTemplate jdbcTemplate;
     private final RowMapper<RestaurantResponse> restaurantRowMapper = (resultSet, _) -> {

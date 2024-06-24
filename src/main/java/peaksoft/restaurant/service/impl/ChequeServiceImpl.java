@@ -13,7 +13,7 @@ import peaksoft.restaurant.exception.NotFoundException;
 import peaksoft.restaurant.repository.ChequeRepository;
 import peaksoft.restaurant.repository.MenuRepository;
 import peaksoft.restaurant.repository.UserRepository;
-import peaksoft.restaurant.repository.dao.impl.ChequesJDBCTemplate;
+import peaksoft.restaurant.repository.dao.impl.ChequesDaoImpl;
 import peaksoft.restaurant.service.ChequeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,13 +34,13 @@ import java.util.List;
 public class ChequeServiceImpl implements ChequeService {
 
     private final ChequeRepository chequeRepo;
-    private final ChequesJDBCTemplate chequesJDBCTemplate;
+    private final ChequesDaoImpl chequesDaoImpl;
     private final UserRepository userRepository;
     private final MenuRepository menuRepository;
 
     @Override
     public ChequeResponsePagination findAll(int currentPage, int pageSize) {
-        return chequesJDBCTemplate.getAllCheques(currentPage, pageSize);
+        return chequesDaoImpl.getAllCheques(currentPage, pageSize);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class ChequeServiceImpl implements ChequeService {
 
     @Override
     public ChequeResponse findById(Long id) {
-        return chequesJDBCTemplate.getById(id);
+        return chequesDaoImpl.getById(id);
     }
 
     @Override

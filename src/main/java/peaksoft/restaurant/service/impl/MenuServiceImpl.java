@@ -12,7 +12,7 @@ import peaksoft.restaurant.exception.NotFoundException;
 import peaksoft.restaurant.repository.MenuRepository;
 import peaksoft.restaurant.repository.RestaurantRepository;
 import peaksoft.restaurant.repository.SubCategoryRepository;
-import peaksoft.restaurant.repository.dao.impl.MenuJDBCTemplate;
+import peaksoft.restaurant.repository.dao.impl.MenuDaoImpl;
 import peaksoft.restaurant.service.MenuService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +28,7 @@ import java.util.List;
 public class MenuServiceImpl implements MenuService {
 
     private final MenuRepository menuRepository;
-    private final MenuJDBCTemplate menuJDBCTemplate;
+    private final MenuDaoImpl menuDaoImpl;
     private final RestaurantRepository restaurantRepository;
     private final SubCategoryRepository subCategoryRepository;
 
@@ -66,12 +66,12 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public MenuPaginationResponse getAll(int page, int pageSize) {
-      return menuJDBCTemplate.getAll(page,pageSize);
+      return menuDaoImpl.getAll(page,pageSize);
     }
 
     @Override
     public MenuResponse getById(Long menuId) {
-        return menuJDBCTemplate.getById(menuId);
+        return menuDaoImpl.getById(menuId);
     }
 
     @Override
@@ -110,13 +110,13 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<SearchResponse> search(String word) {
-        return menuJDBCTemplate.searchMenu(word);
+        return menuDaoImpl.searchMenu(word);
     }
 
     @Override
     public List<MenuResponse> sortByPrice(String word) {
         if(word.equalsIgnoreCase("asc") || word.equalsIgnoreCase("desc")){
-            return menuJDBCTemplate.sortByPrice(word);
+            return menuDaoImpl.sortByPrice(word);
         }
         throw new NotFoundException("I don’t understand how to display your request Please enter it correctly");
     }
@@ -124,7 +124,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public List<MenuResponse> filter(String word) {
         if (word.equalsIgnoreCase("true") || word.equalsIgnoreCase("false")) {
-            return menuJDBCTemplate.filterByBoo(word);
+            return menuDaoImpl.filterByBoo(word);
         }
         throw new NotFoundException("Food and category with this name is NOT FOUND ");
     }

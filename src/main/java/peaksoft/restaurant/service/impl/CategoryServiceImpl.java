@@ -7,7 +7,7 @@ import peaksoft.restaurant.dto.SimpleResponse;
 import peaksoft.restaurant.entity.Category;
 import peaksoft.restaurant.exception.NotFoundException;
 import peaksoft.restaurant.repository.CategoryRepository;
-import peaksoft.restaurant.repository.dao.impl.CategoryJDBCTemplate;
+import peaksoft.restaurant.repository.dao.impl.CategoryDaoImpl;
 import peaksoft.restaurant.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
-    private final CategoryJDBCTemplate categoryJDBCTemplate;
+    private final CategoryDaoImpl categoryDaoImpl;
 
     @Override
     public SimpleResponse saveCategory(CategoryRequest categoryRequest) {
@@ -39,7 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryPaginationResponse getAllCategory(int page, int pageSize) {
         log.info("All categories exit");
-        return categoryJDBCTemplate.getAllCategory(page,pageSize);
+        return categoryDaoImpl.getAllCategory(page,pageSize);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class CategoryServiceImpl implements CategoryService {
                     String.format("Category with id %s not found", categoryId));
         }
         log.info(String.format("Category with id %s successfully get", categoryId));
-        return categoryJDBCTemplate.getCategoryById(categoryId);
+        return categoryDaoImpl.getCategoryById(categoryId);
     }
 
     @Override

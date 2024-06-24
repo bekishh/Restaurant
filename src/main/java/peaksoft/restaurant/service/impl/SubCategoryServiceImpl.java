@@ -10,7 +10,7 @@ import peaksoft.restaurant.exception.NotFoundException;
 import peaksoft.restaurant.repository.CategoryRepository;
 import peaksoft.restaurant.repository.MenuRepository;
 import peaksoft.restaurant.repository.SubCategoryRepository;
-import peaksoft.restaurant.repository.dao.impl.SubCategoryJDBCTemplate;
+import peaksoft.restaurant.repository.dao.impl.SubCategoryDaoImpl;
 import peaksoft.restaurant.service.SubCategoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ import java.util.List;
 public class SubCategoryServiceImpl implements SubCategoryService {
     private final MenuRepository menuRepository;
     private final SubCategoryRepository subCategoryRepository;
-    private final SubCategoryJDBCTemplate subCategoryJDBCTemplate;
+    private final SubCategoryDaoImpl subCategoryDaoImpl;
     private final CategoryRepository categoryRepository;
 
     @Override
@@ -50,7 +50,7 @@ public class SubCategoryServiceImpl implements SubCategoryService {
     @Override
     public List<SubCategoryResponse> getAllSubCategoryByCategoryId(Long categoryId) {
         log.info("Subcategory successfully gedet");
-        return subCategoryJDBCTemplate.getAllSubCategoryWithCategoriesId(categoryId);
+        return subCategoryDaoImpl.getAllSubCategoryWithCategoriesId(categoryId);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class SubCategoryServiceImpl implements SubCategoryService {
             throw new NotFoundException(String.format("SubCategory with id:%s not found or is exists", subCategoryId));
         }
         log.info(String.format("SubCategory with id:%s successfully foundet", subCategoryId));
-        return subCategoryJDBCTemplate.getSubCategoryById(subCategoryId);
+        return subCategoryDaoImpl.getSubCategoryById(subCategoryId);
     }
 
     @Override
@@ -106,6 +106,6 @@ public class SubCategoryServiceImpl implements SubCategoryService {
     @Override
     public SubCategoryPagination getAllSubCategories(int currentPage, int pageSize) {
         log.info("SubCategory successfully gedet with pagination");
-        return subCategoryJDBCTemplate.getAllSubCategories(currentPage, pageSize);
+        return subCategoryDaoImpl.getAllSubCategories(currentPage, pageSize);
     }
 }
